@@ -12,9 +12,13 @@ fn main() {
     // Tell cargo to tell rustc to link the system bzip2
     // shared library.
     //println!("cargo:rustc-link-lib=bz2");
-
+    println!("cargo:rustc-link-search=native=D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition\\src\\SpecalPlugin\\CommonLibSSE\\buildCl");
+    println!("cargo:rustc-link-lib=CommonLibSSE");
+    println!("cargo:rustc-link-lib=Version");
+    println!("cargo:rustc-link-lib=User32");
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=wrapper.hpp");
+
 
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
@@ -29,24 +33,28 @@ fn main() {
         .clang_arg("-std=c++20")
         .clang_arg("-fms-extensions")
         .clang_arg("-fms-compatibility")
+        .opaque_type("std::.*")
         .fit_macro_constants(true)
-        .layout_tests(false)
         .time_phases(true)
         .detect_include_paths(true)
         .respect_cxx_access_specs(true)
         .record_matches(true)
-        .allowlist_function("*GetRTTI*")
-        .allowlist_function("*SKSE*")
-        .allowlist_function("*AsNode*")
-        .allowlist_function("*GetFullName*")
-        .allowlist_type("*SKSE*")
-        .allowlist_var("*SKSE*")
-        .allowlist_var("^RE_.*")
-        .allowlist_type("^RE_.*")
-        .allowlist_function("^RE_.*")
-        .allowlist_function("^REL_.*")
-        .allowlist_type("^REL_.*")
-        .allowlist_var("^REL_.*")
+        .allowlist_function("RE::.*")
+        .allowlist_var("RE::.*")
+        .allowlist_type("RE::.*")
+        .allowlist_function("SKSE::.*")
+        .allowlist_var("SKSE::.*")
+        .allowlist_type("SKSE::.*")
+        .opaque_type("RE::BSTArray.*")
+        .opaque_type("RE::BSSimpleList.*")
+        .opaque_type("RE::BSTSmartPointer.*")
+        .opaque_type("RE::BSTSingletonSDMBase.*")
+        .opaque_type("RE::NiTMapBase.*")
+        .opaque_type("RE::NiTStringTemplateMap.*")
+        .opaque_type("SKSE::stl::enumeration.*")
+        .opaque_type("SKSE::stl::observer.*")
+        .opaque_type("RE::BSTPointerAndFlags.*")
+        .layout_tests(false)
         //.clang_arg("-ferror-limit=90000")
         //.clang_arg("-v")
         //.emit_clang_ast()
