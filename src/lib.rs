@@ -5,9 +5,4 @@
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
-pub fn testing() {
-    unsafe {
-        use root::SKSE::WinAPI::GetCurrentProcess;
-        let x = GetCurrentProcess();
-    }
-}
+

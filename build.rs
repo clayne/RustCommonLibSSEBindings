@@ -13,9 +13,12 @@ fn main() {
     // shared library.
     //println!("cargo:rustc-link-lib=bz2");
     println!("cargo:rustc-link-search=native=D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition\\src\\SpecalPlugin\\CommonLibSSE\\buildCl");
+    println!("cargo:rustc-link-search=native=D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition\\src\\SpecalPlugin\\CommonLibSSE\\buildCl\\vcpkg_installed\\x64-windows-static-md\\lib");
     println!("cargo:rustc-link-lib=CommonLibSSE");
     println!("cargo:rustc-link-lib=Version");
     println!("cargo:rustc-link-lib=User32");
+    println!("cargo:rustc-link-lib=spdlog");
+    println!("cargo:rustc-link-lib=fmt");
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=wrapper.hpp");
 
